@@ -9,7 +9,7 @@ public interface UserService {
      * 分页查询所有用户
      * @return
      */
-    List<User> findAll(int pageNo);
+    List<User> findAll(int pageNo, int perPage);
 
     /**
      * 根据id查询用户
@@ -22,7 +22,7 @@ public interface UserService {
      * @param userName
      * @return
      */
-    List<User> findByUserName(String userName, int pageNo);
+    List<User> findByUserName(String userName, int pageNo, int perPage);
 
     /**
      * 登录

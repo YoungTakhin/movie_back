@@ -23,10 +23,10 @@ public class UserController {
      * 分页查询所有用户
      * @return
      */
-    @PostMapping(value = "{pageNo}/user")
+    @PostMapping(value = "{pageNo}/users/{perPage}")
     @ApiOperation(value="获取用户列表", notes="分页查询所有用户")
-    public String findAll(@PathVariable("pageNo") int pageNo) {
-        List<User> users = userService.findAll(pageNo);
+    public String findAll(@PathVariable("pageNo") int pageNo, @PathVariable("perPage") int perPage) {
+        List<User> users = userService.findAll(perPage * (pageNo - 1), perPage);
         return JSON.toJSONString(users);
     }
 
@@ -47,10 +47,11 @@ public class UserController {
      * @param userName
      * @return
      */
-    @PostMapping(value = "{pageNo}/user/{userName}")
+    @GetMapping(value = "{pageNo}/users/{perPage}/{userName}")
     @ApiOperation(value="根据用户名查询用户", notes="根据用户名模糊查询用户")
-    public String findByUserName(@PathVariable String userName, @PathVariable int pageNo) {
-        List<User> users = userService.findByUserName(userName, pageNo);
+    public String findByUserName(@PathVariable("userName") String userName,
+                                 @PathVariable("pageNo") int pageNo, @PathVariable("perPage") int perPage) {
+        List<User> users = userService.findByUserName(userName, perPage * (pageNo - 1), perPage);
         return JSON.toJSONString(users);
     }
 

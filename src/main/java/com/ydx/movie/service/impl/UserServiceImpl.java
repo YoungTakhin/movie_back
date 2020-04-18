@@ -15,8 +15,8 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public List<User> findAll(int pageNo) {
-        return userMapper.findAll(pageNo);
+    public List<User> findAll(int pageNo, int perPage) {
+        return userMapper.findAll(pageNo, perPage);
     }
 
     @Override
@@ -25,8 +25,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findByUserName(String userName, int pageNo) {
-        return userMapper.findByUserName(userName, pageNo);
+    public List<User> findByUserName(String userName, int pageNo, int perPage) {
+        return userMapper.findByUserName(userName, pageNo, perPage);
     }
 
     @Override

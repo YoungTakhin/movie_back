@@ -66,7 +66,7 @@ public class MovieController {
     @PostMapping(value="/movies/search")
     @ApiOperation(value="搜索电影", notes="根据电影名模糊分页搜索电影")
     public String findMoviesByName(@RequestBody MovieVo movieVo) {
-        List<Movie> movies = movieService.findMoviesByName(movieVo.getMovieName(), movieVo.getPageNo(), 24);
+        List<Movie> movies = movieService.findMoviesByName(movieVo.getMovieName(), 24 * (movieVo.getPageNo() - 1), 24);
         return JSON.toJSONString(movies);
     }
 

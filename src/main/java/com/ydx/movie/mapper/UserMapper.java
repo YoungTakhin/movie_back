@@ -14,8 +14,8 @@ public interface UserMapper {
      * 查询所有用户
      * @return
      */
-    @Select("SELECT * FROM users LIMIT #{pageNo}, 50")
-    List<User> findAll(@Param("pageNo") int pageNo);
+    @Select("SELECT * FROM users LIMIT #{pageNo}, #{perPage}")
+    List<User> findAll(@Param("pageNo") int pageNo, @Param("perPage") int perPage);
 
     /**
      * 根据id查询用户
@@ -31,8 +31,9 @@ public interface UserMapper {
      * @param pageNo
      * @return
      */
-    @Select("SELECT * FROM users WHERE username LIKE '%${value}%' LIMIT #{pageNo}, 50")
-    List<User> findByUserName(@Param("value") String userName, @Param("pageNo") int pageNo);
+    @Select("SELECT * FROM users WHERE username LIKE '%${value}%' LIMIT #{pageNo}, #{perPage}")
+    List<User> findByUserName(@Param("value") String userName,
+                              @Param("pageNo") int pageNo, @Param("perPage") int perPage);
 
     /**
      * 用户登录
