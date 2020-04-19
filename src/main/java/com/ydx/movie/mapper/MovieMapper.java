@@ -45,9 +45,8 @@ public interface MovieMapper {
     @Select("SELECT * FROM movies WHERE title LIKE '%${value}%' ORDER BY date DESC LIMIT #{pageNo}, #{pageSize}")
     List<Movie> findMoviesByName(@Param("value") String movieName,
                                  @Param("pageNo") int pageNo, @Param("pageSize") int pageSize);
-
     /**
-     * 查询电影总数
+     * 查询搜索电影总数
      * @param movieName
      * @return
      */

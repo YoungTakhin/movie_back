@@ -20,6 +20,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int getUserCount() {
+        return userMapper.getUserCount();
+    }
+
+    @Override
     public User findById(int userId){
         return userMapper.findById(userId);
     }
@@ -27,6 +32,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findByUserName(String userName, int pageNo, int perPage) {
         return userMapper.findByUserName(userName, pageNo, perPage);
+    }
+
+    @Override
+    public int findByNameCount(String userName) {
+        return userMapper.findByNameCount(userName);
     }
 
     @Override

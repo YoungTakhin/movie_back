@@ -71,12 +71,12 @@ public class MovieController {
     }
 
     /**
-     * 搜索电影数
+     * 搜索电影结果数
      * @param movieName
      * @return
      */
     @GetMapping(value="/movies/search/count")
-    @ApiOperation(value="搜索电影数", notes="返回搜索出的电影数")
+    @ApiOperation(value="搜索电影结果数", notes="返回搜索出的电影数")
     public int countOfSearch(String movieName) {
         return movieService.countOfSearch(movieName);
     }

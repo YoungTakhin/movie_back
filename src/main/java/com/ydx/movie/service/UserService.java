@@ -12,6 +12,12 @@ public interface UserService {
     List<User> findAll(int pageNo, int perPage);
 
     /**
+     * 查询用户总数
+     * @return
+     */
+    int getUserCount();
+
+    /**
      * 根据id查询用户
      * @return
      */
@@ -23,6 +29,13 @@ public interface UserService {
      * @return
      */
     List<User> findByUserName(String userName, int pageNo, int perPage);
+
+    /**
+     * 查询根据id查询的用户结果数
+     * @param userName
+     * @return
+     */
+    int findByNameCount(String userName);
 
     /**
      * 登录

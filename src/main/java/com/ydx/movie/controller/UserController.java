@@ -31,6 +31,16 @@ public class UserController {
     }
 
     /**
+     * 查询用户总数
+     * @return
+     */
+    @GetMapping(value = "/users/count")
+    @ApiOperation(value = "用户总数", notes = "返回用户总数")
+    public int getUserCount() {
+        return userService.getUserCount();
+    }
+
+    /**
      * 根据id查询用户
      * @param userId
      * @return
@@ -53,6 +63,17 @@ public class UserController {
                                  @PathVariable("pageNo") int pageNo, @PathVariable("perPage") int perPage) {
         List<User> users = userService.findByUserName(userName, perPage * (pageNo - 1), perPage);
         return JSON.toJSONString(users);
+    }
+
+    /**
+     * 模糊搜索用户结果数
+     * @param userName
+     * @return
+     */
+    @GetMapping(value = "users/search/count")
+    @ApiOperation(value = "搜索用户结果数", notes = "返回搜索用户的总数")
+    public int findByNameCount(String userName) {
+        return userService.findByNameCount(userName);
     }
 
     /**

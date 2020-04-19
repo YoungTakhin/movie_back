@@ -18,6 +18,13 @@ public interface UserMapper {
     List<User> findAll(@Param("pageNo") int pageNo, @Param("perPage") int perPage);
 
     /**
+     * 查询用户总数
+     * @return
+     */
+    @Select("SELECT COUNT(*) FROM users LIMIT 1")
+    int getUserCount();
+
+    /**
      * 根据id查询用户
      * @param userId
      * @return
@@ -34,6 +41,14 @@ public interface UserMapper {
     @Select("SELECT * FROM users WHERE username LIKE '%${value}%' LIMIT #{pageNo}, #{perPage}")
     List<User> findByUserName(@Param("value") String userName,
                               @Param("pageNo") int pageNo, @Param("perPage") int perPage);
+
+    /**
+     * 根据用户名查询的用户结果数
+     * @param userName
+     * @return
+     */
+    @Select("SELECT COUNT(*) FROM users WHERE username LIKE '%${value}%' LIMIT 1")
+    int findByNameCount(@Param("value") String userName);
 
     /**
      * 用户登录
@@ -61,7 +76,7 @@ public interface UserMapper {
      * 修改密码
      * @return
      */
-    @Update("UPDATE users SET passwrod=#{password} WHERE userid=#{userId} LIMIT 1")
+    @Update("UPDATE users SET password=#{password} WHERE userid=#{userId} LIMIT 1")
     int setPassword(@Param("userId") int userId, @Param("password") String password);
 
 }
