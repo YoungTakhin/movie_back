@@ -1,5 +1,6 @@
 package com.ydx.movie.mapper;
 
+import com.ydx.movie.controller.vo.RegisterVo;
 import com.ydx.movie.entity.User;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -51,26 +52,28 @@ public interface UserMapper {
     int findByNameCount(@Param("value") String userName);
 
     /**
+     * 根据用户名查询精确查找用户数
+     * @param userName
+     * @return
+     */
+    @Select("SELECT COUNT(*) FROM users WHERE username = #{userName} LIMIT 1")
+    int countByName(@Param("userName") String userName);
+
+    /**
      * 用户登录
-     * @param userId
+     * @param userName
      * @param password
      * @return
      */
-    @Select("SELECT * FROM users WHERE userid=#{userId} AND password=#{password}")
-    User login(@Param("userId") int userId, @Param("password") String password);
+    @Select("SELECT * FROM users WHERE username=#{userName} AND password=#{password}")
+    User login(@Param("userName") String userName, @Param("password") String password);
 
     /**
      * 添加用户
      * @return
      */
-
-    @Insert("INSERT INTO users(username, password, admin) VALUES(#{user.userName}, #{user.password}, 0)")
-    @SelectKey(statement = "SELECT max(userid) from users",
-            keyProperty = "user.userId",
-            before = false,
-            resultType = int.class)
-    // @Options(useGeneratedKeys = true, keyProperty = "user.userId", keyColumn = "userid")
-    int addUser(@Param("user") User user);
+    @Insert("INSERT INTO users(username, password, admin) VALUES(#{userName}, #{password}, 0)")
+    int register(@Param("userName") String userName, @Param("password") String password);
 
     /**
      * 修改密码

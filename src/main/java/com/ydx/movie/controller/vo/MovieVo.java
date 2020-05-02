@@ -5,6 +5,8 @@ public class MovieVo {
 
     private int pageNo;
 
+    private int perPage;
+
     public String getMovieName() {
         return movieName;
     }
@@ -19,5 +21,13 @@ public class MovieVo {
 
     public void setPageNo(int pageNo) {
         this.pageNo = pageNo;
+    }
+
+    public int getPerPage() {
+        return perPage;
+    }
+
+    public void setPerPage(int perPage) {
+        this.perPage = perPage;
     }
 }

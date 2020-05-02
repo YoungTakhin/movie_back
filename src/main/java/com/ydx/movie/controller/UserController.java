@@ -84,11 +84,7 @@ public class UserController {
     @PostMapping(value = "/login")
     @ApiOperation(value="用户登录", notes="根据用户id和密码查询用户")
     public String login(@RequestBody LoginVo loginVo) {
-        User user = userService.login(loginVo.getUserId(), loginVo.getPassword());
-        if (user == null) {
-            return null;
-        }
-        return JSON.toJSONString(user);
+        return JSON.toJSONString(userService.login(loginVo.getUserName(), loginVo.getPassword()));
     }
 
     /**
@@ -99,8 +95,7 @@ public class UserController {
     @PostMapping(value = "/register")
     @ApiOperation(value="用户注册", notes="新增用户")
     public String register(@RequestBody RegisterVo registerVo) {
-        User user = userService.register(registerVo.getUserName(), registerVo.getPassword());
-        return JSON.toJSONString(user);
+        return JSON.toJSONString(userService.register(registerVo));
     }
 
     /**

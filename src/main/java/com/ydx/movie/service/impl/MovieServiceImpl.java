@@ -3,7 +3,6 @@ package com.ydx.movie.service.impl;
 import com.ydx.movie.entity.Movie;
 import com.ydx.movie.mapper.MovieMapper;
 import com.ydx.movie.service.MovieService;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,5 +37,10 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public int countOfSearch(String movieName) {
         return movieMapper.countOfSearch(movieName);
+    }
+
+    @Override
+    public int deleteMovie(int tmdbId) {
+        return movieMapper.deleteMovie(tmdbId);
     }
 }

@@ -1,15 +1,15 @@
 package com.ydx.movie.controller.vo;
 
 public class LoginVo {
-    private int userId;
+    private String userName;
     private String password;
 
-    public int getUserId() {
-        return userId;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {

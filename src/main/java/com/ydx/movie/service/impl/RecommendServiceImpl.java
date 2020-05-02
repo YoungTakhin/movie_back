@@ -4,7 +4,6 @@ import java.lang.String;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.sun.scenario.effect.impl.prism.PrRenderInfo;
 import com.ydx.movie.entity.Recommend;
 import com.ydx.movie.service.MovieService;
 import com.ydx.movie.service.RecommendService;
@@ -43,11 +42,10 @@ public class RecommendServiceImpl implements RecommendService {
         ResponseEntity<String> r = restTemplate.getForEntity(url, String.class);
         JSONObject jsonObject = JSONObject.parseObject(String.valueOf(r.getBody()));
 
-        for (String tmdbid : jsonObject.keySet()) {
-            recommend.addRecommend(movieService.findMovieByTmdbid(Integer.parseInt(tmdbid)),
-                    jsonObject.getFloat(tmdbid));
+        for (String tId : jsonObject.keySet()) {
+            recommend.addRecommend(movieService.findMovieByTmdbid(Integer.parseInt(tId)),
+                    jsonObject.getFloat(tId));
         }
-        // System.out.println(recommend.getRecommendList().size());
         return JSON.toJSONString(recommend);
     }
 }

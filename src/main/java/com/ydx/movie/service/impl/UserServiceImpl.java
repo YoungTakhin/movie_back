@@ -1,10 +1,10 @@
 package com.ydx.movie.service.impl;
 
+import com.ydx.movie.controller.vo.RegisterVo;
 import com.ydx.movie.entity.User;
 import com.ydx.movie.mapper.UserMapper;
 import com.ydx.movie.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,28 +40,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(int userId, String password) {
-        User user = userMapper.login(userId, password);
-        try {
-            if (user == null) {
-                return null;
-            }
-        }
-        catch (Exception e) {
-            System.out.println(e.toString());
+    public User login(String userName, String password) {
+        User user = userMapper.login(userName, password);
+        if (user != null) {
+            user.setPassword("******");
         }
         return user;
     }
 
     @Override
-    public User register(String userName, String password) {
-        User user = new User();
-        user.setUserName(userName);
-        user.setPassword(password);
-        if (userMapper.addUser(user) != 1) {
-            return null;
+    public User register(RegisterVo registerVo) {
+        if (userMapper.countByName(registerVo.getUserName()) == 0) {
+            if (userMapper.register(registerVo.getUserName(), registerVo.getPassword()) == 1) {
+                return this.login(registerVo.getUserName(), registerVo.getPassword());
+            }
         }
-        return user;
+        return null;
     }
 
     @Override

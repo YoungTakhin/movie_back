@@ -1,5 +1,6 @@
 package com.ydx.movie.service;
 
+import com.ydx.movie.controller.vo.RegisterVo;
 import com.ydx.movie.entity.User;
 
 import java.util.List;
@@ -39,19 +40,18 @@ public interface UserService {
 
     /**
      * 登录
-     * @param userId
-     * @param password
-     * @return
-     */
-    User login(int userId, String password);
-
-    /**
-     * 注册
      * @param userName
      * @param password
      * @return
      */
-    User register(String userName, String password);
+    User login(String userName, String password);
+
+    /**
+     * 注册
+     * @param registerVo
+     * @return
+     */
+    User register(RegisterVo registerVo);
 
     /**
      * 修改密码

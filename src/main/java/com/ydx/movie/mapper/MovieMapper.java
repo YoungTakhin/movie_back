@@ -1,6 +1,7 @@
 package com.ydx.movie.mapper;
 
 import com.ydx.movie.entity.Movie;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -53,5 +54,11 @@ public interface MovieMapper {
     @Select("SELECT COUNT(*) FROM movies WHERE title LIKE '%${value}%'")
     int countOfSearch(@Param("value") String movieName);
 
-
+    /**
+     * 删除电影
+     * @param tmdbId
+     * @return
+     */
+    @Delete("DELETE FROM movies WHERE tmdbid=#{tmdbId} LIMIT 1")
+    int deleteMovie(@Param("tmdbId") int tmdbId);
 }

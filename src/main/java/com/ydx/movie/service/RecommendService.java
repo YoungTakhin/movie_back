@@ -1,7 +1,5 @@
 package com.ydx.movie.service;
 
-import com.ydx.movie.entity.Recommend;
-
 public interface RecommendService {
 
     /**
@@ -10,5 +8,4 @@ public interface RecommendService {
      * @return 电影推荐map
      */
     String recommendForUser(int userId);
-    //Recommend recommend(int userId);
 }

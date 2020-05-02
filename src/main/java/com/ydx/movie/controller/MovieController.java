@@ -3,11 +3,8 @@ package com.ydx.movie.controller;
 import com.alibaba.fastjson.JSON;
 import com.ydx.movie.controller.vo.MovieVo;
 import com.ydx.movie.entity.Movie;
-import com.ydx.movie.entity.User;
 import com.ydx.movie.service.MovieService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,13 +23,10 @@ public class MovieController {
      * @param pageNo
      * @return
      */
-    @GetMapping("/{pageNo}/movies")
+    @GetMapping("/{pageNo}/movies/{perPage}")
     @ApiOperation(value="分页查询电影", notes="分页查询电影")
-    public String getMovies(@PathVariable("pageNo") int pageNo) {
-        List<Movie> movies = movieService.getMovies(24 * (pageNo - 1), 24);
-        for (Movie movie: movies) {
-            //System.out.println(movie);
-        }
+    public String getMovies(@PathVariable("pageNo") int pageNo, @PathVariable("perPage") int perPage) {
+        List<Movie> movies = movieService.getMovies(perPage * (pageNo - 1), perPage);
         return JSON.toJSONString(movies);
     }
 
@@ -66,7 +60,8 @@ public class MovieController {
     @PostMapping(value="/movies/search")
     @ApiOperation(value="搜索电影", notes="根据电影名模糊分页搜索电影")
     public String findMoviesByName(@RequestBody MovieVo movieVo) {
-        List<Movie> movies = movieService.findMoviesByName(movieVo.getMovieName(), 24 * (movieVo.getPageNo() - 1), 24);
+        List<Movie> movies = movieService.findMoviesByName(movieVo.getMovieName(),
+                movieVo.getPerPage() * (movieVo.getPageNo() - 1), movieVo.getPerPage());
         return JSON.toJSONString(movies);
     }
 
@@ -79,5 +74,16 @@ public class MovieController {
     @ApiOperation(value="搜索电影结果数", notes="返回搜索出的电影数")
     public int countOfSearch(String movieName) {
         return movieService.countOfSearch(movieName);
+    }
+
+    /**
+     * 删除电影
+     * @param tmdbId
+     * @return
+     */
+    @PostMapping(value = "/movie/delete/{tmdbId}")
+    @ApiOperation(value="删除电影", notes="根据电影TMDB ID删除电影")
+    public int deleteMovie(@PathVariable("tmdbId") int tmdbId) {
+        return movieService.deleteMovie(tmdbId);
     }
 }

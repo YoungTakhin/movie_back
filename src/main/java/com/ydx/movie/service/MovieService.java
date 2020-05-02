@@ -40,4 +40,11 @@ public interface MovieService {
      * @return
      */
     int countOfSearch(String movieName);
+
+    /**
+     * 删除电影
+     * @param tmdbId
+     * @return
+     */
+    int deleteMovie(int tmdbId);
 }

@@ -1,7 +1,5 @@
 package com.ydx.movie.entity;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Scope;
 
 import java.io.Serializable;
 import java.util.*;
@@ -9,10 +7,6 @@ import java.util.*;
 public class Recommend implements Serializable {
 
     private List<Movie> recommendList;
-
-//    public Recommend(Map<Movie, Float> recommendMap) {
-////        this.recommendMap = recommendMap;
-////    }
 
     public Recommend() {
         this.recommendList = new ArrayList<>();

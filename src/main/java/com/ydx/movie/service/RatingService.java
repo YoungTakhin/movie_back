@@ -1,7 +1,6 @@
 package com.ydx.movie.service;
 
 import com.ydx.movie.entity.Rating;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
